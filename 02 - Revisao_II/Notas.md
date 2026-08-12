@@ -1,6 +1,6 @@
 # Conteúdo da aula:
 
-- Classes e Diagramas de classes: [Pdf](AMS-05-Classes e Diagramas de Classe.pdf)
+- Classes e Diagramas de classes: [Pdf](PDFs/AMS-05-Classes e Diagramas de Classe.pdf)
 - Codigo python implementado na aula: [[python.md]]
 
 
