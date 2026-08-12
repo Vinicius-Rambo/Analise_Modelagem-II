@@ -5,7 +5,7 @@ Para a pizzaria, criei uma estrutura onde Cliente, Atendente e Entregador herdam
 
 ### Codigo PlantUML
 
-´´´plantuml
+```plantuml
 @startuml
 skinparam classAttributeIconSize 0
 
@@ -107,7 +107,7 @@ Atendente "1" -- "0..*" Pedido : gerencia >
 Entregador "1" -- "0..*" Entrega : realiza >
 
 @enduml
-´´´
+```
 
 ### Imagem 
 ![Pizzaria](imgs/Pizzaria.png)
