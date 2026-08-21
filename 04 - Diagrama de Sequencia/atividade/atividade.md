@@ -35,7 +35,7 @@ Tela --> Cliente: apresentarResultado()
 ```
 
 ### Imagem:
-![Pedido](image.png)
+![Pedido](pedido.png)
 
 ## Empréstimo de livro
 
