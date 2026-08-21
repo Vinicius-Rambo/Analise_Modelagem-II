@@ -4,7 +4,7 @@ Para o processo de realização de pedido, estruturei a comunicação entre o at
 
 ### Codigo PlantUML
 
-´´´plantuml
+```plantuml
 @startuml
 skinparam maxMessageSize 150
 
@@ -32,7 +32,7 @@ end
 Tela --> Cliente: apresentarResultado()
 
 @enduml
-´´´
+```
 
 ### Imagem:
 ![Pedido](image.png)
@@ -42,7 +42,7 @@ Tela --> Cliente: apresentarResultado()
 Para o sistema de biblioteca estruturado em MVC, o Atendente interage com a InterfaceEmprestimo (View), que delega a lógica de negócio para o SistemaBiblioteca (Controller). O controlador realiza as verificações necessárias instanciando as classes de modelo (Usuario e Livro). Caso as regras de negócio sejam satisfeitas no bloco alt, a entidade Emprestimo é gerada, salva no BancoDeDados, o status do livro é alterado, e o sucesso é retornado à view. Caso contrário, o fluxo alternativo exibe a falha.
 
 ### Codigo PlantUML
-´´´plantuml
+```plantuml
 @startuml
 skinparam maxMessageSize 150
 
@@ -79,7 +79,7 @@ else Usuario Inapto OU Livro Indisponível
 end
 
 @enduml
-´´´
+```
 
 ### Imagem
 ![Imagme do emprestimo](emprestimo.png)
