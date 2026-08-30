@@ -33,7 +33,7 @@ Artista --> UC6
 @enduml
 ```
 
-![[01.png]]
+![Imagem](01.png)
 
 ---
 
@@ -86,7 +86,8 @@ Artista "1" -- "0..*" Musica : cadastra
 @enduml
 ```
 
-![[02.png]]
+![Imagem](02.png)
+
 
 ---
 
@@ -143,7 +144,7 @@ artista2 -- musica2
 @enduml
 ```
 
-![[03.png]]
+![Imagem](03.png)
 
 ---
 
@@ -185,7 +186,7 @@ TelaPlaylist --> Usuario: apresentarConfirmacao()
 @enduml
 ```
 
-![[04.png]]
+![Imagem](04.png)
 
 ---
 
@@ -226,4 +227,4 @@ tela --> usuario : 8: apresentarConfirmacao()
 @enduml
 ```
 
-![[05.png]]
+![Imagem](05.png)
