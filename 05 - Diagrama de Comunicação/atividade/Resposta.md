@@ -156,7 +156,9 @@ Para o cenário de **Adicionar Música à Playlist**, o Usuário seleciona uma m
 
 ```plantuml
 @startuml
+
 skinparam maxMessageSize 150
+skinparam responseMessageBelowArrow true
 
 actor Usuario
 boundary TelaPlaylist
@@ -166,27 +168,54 @@ entity Musica
 database BancoDeDados as BD
 
 Usuario -> TelaPlaylist: selecionarMusica(musicaId)
+activate TelaPlaylist
+
 TelaPlaylist -> PlaylistController: adicionarMusica(playlistId, musicaId)
+activate PlaylistController
 
 PlaylistController -> Playlist: buscarPlaylist(playlistId)
+activate Playlist
 Playlist --> PlaylistController: playlist
+deactivate Playlist
 
 PlaylistController -> Musica: buscarMusica(musicaId)
+activate Musica
 Musica --> PlaylistController: musica
+deactivate Musica
 
-PlaylistController -> Playlist: adicionarMusica(musica)
-Playlist --> PlaylistController: musicaAdicionada()
+PlaylistController -> Playlist: verificarMusica(musica)
+activate Playlist
+Playlist --> PlaylistController: musicaExiste
+deactivate Playlist
 
-PlaylistController -> BD: salvarAlteracao(playlist)
-BD --> PlaylistController: confirmacaoSalvamento()
+alt Música não está na playlist
 
-PlaylistController --> TelaPlaylist: confirmacaoAdicao()
-TelaPlaylist --> Usuario: apresentarConfirmacao()
+    PlaylistController -> Playlist: adicionarMusica(musica)
+    activate Playlist
+    Playlist --> PlaylistController: musicaAdicionada()
+    deactivate Playlist
+
+    PlaylistController -> BD: salvarAlteracao(playlist)
+    activate BD
+    BD --> PlaylistController: confirmacaoSalvamento()
+    deactivate BD
+
+    PlaylistController --> TelaPlaylist: confirmacaoAdicao()
+    
+else Música já está na playlist
+
+    PlaylistController --> TelaPlaylist: musicaJaAdicionada()
+
+end
+
+deactivate PlaylistController
+
+TelaPlaylist --> Usuario: apresentarResultado()
+deactivate TelaPlaylist
 
 @enduml
 ```
-
-![Imagem](04.png)
+![imagem](04.png)
 
 ---
 
