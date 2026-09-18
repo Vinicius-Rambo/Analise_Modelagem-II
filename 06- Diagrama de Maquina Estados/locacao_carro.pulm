@@ -1,0 +1,39 @@
+@startuml
+title Locação de carro
+
+state "Locação solicitada" as locacaoSolicitada
+state "Reserva confirmada" as ReservaConfirmada
+state "Reserva cancelada" as ReservaCancela
+state "Veículo retirado" as VeiculoRetirado
+state "Veículo em uso" as VeiculoEmUso
+state "Veículo devolvido" as VeiculoDevolvido
+state "Em inspeção" as EmInspecao
+state "Em manutenção" as EmManutencao
+state "Locação encerrada" as LocacaoEncerrada
+
+state VerificarDisponibilidade <<choice>>
+state ResultadoInspecao <<choice>>
+
+[*] --> locacaoSolicitada
+locacaoSolicitada --> VerificarDisponibilidade: verificar disponibilidade 
+VerificarDisponibilidade --> ReservaConfirmada: [veiculo disponivel]
+verificarDisponibilidade --: LocacaoEncerrada: [veiculo indisponivel]
+
+ReservaConfirmada --> VeiculoRetirado: retirar veiculo
+ReservaConfirmada --> ReservaCancelada: cancelar Reserva
+
+ReservaCancelada --> LocacaoEncerrada: cancelar Locação 
+
+VeiculoRetirado --> VeiculoEmUso: iniciar utilização
+VeiculoEmUso --> VeiculoDevolvido: devolver veiculo 
+VeiculoDevolvido --> EmInspecao: realizar inspeção 
+
+EmInspecao --> ResultadoInspecao 
+
+ResultadoInspecao --> LocacaoEncerrada: [sem problemas]
+ResultadoInspecao --> EmManutencao: [problema indentificado]
+
+EmManutencao --> LocacaoEncerrada: manutenção concluida 
+LocacaoEncerrada --> [*]
+
+@endeuml 
