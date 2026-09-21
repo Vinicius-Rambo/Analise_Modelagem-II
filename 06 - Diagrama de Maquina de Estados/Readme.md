@@ -6,4 +6,4 @@ Aula: 17/09
 
 # Atividade
 - ![Enunciado](Atividade/enunciado.md)
-- ![Enunciado](Atividade/atividade.md)
+- ![Atividade](Atividade/atividade.md)
