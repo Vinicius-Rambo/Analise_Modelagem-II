@@ -1,0 +1,50 @@
+workspace "Sistema de vendas" {
+    model {
+        cliente = person "Cliente" "Cliente da loja online"
+
+        pagamento = softwareSystem "Gateway de Pagamento" "Serviço de processamento de cartões" {
+            tags "External"
+        }
+
+        sistemaVendas = softwareSystem "Sistema de Vendas" "Plataforma de e-commerce." {
+            web = container "Front end WEB" "Interface de compras." "React"
+            api = container "API Back end" "Processa regras de negocio e pagamentos" "Python/Django" {
+                pedidoController = component "Controller de Pedidos" "Gerencia o fluxo de compra"
+                pagCliente = component "Controller de Pagamento" "Encapsula comunicação com API Externa"
+            }
+            db = container "Banco de Dados" "Armazena dados do usuario, pedidos e cartões de credito" "PostgreSQL" {
+                tags "Database"
+            }
+        }
+
+    cliente -> web "Acessa a loja e compra produtos"
+
+    web -> pedidoController "Envia dados da compra via JSON/HTTPS"
+    pedidoController -> pagCliente "Delega o processamento financeiro"
+    pagCliente -> pagamento "Processa cartão via HTTPS (Ver ADR-001)"
+    pedidoController -> db "Salva apenas o status do pedido(sem cartão)"
+    }
+    views {
+        systemContext sistemaVendas {
+            include *
+            autoLayout
+        }
+        container sistemaVendas {
+            include *
+            autoLayout
+        }
+        component api {
+            include *
+            autoLayout
+        }
+        styles {
+            element "Database" { 
+                shape Cylinder
+            }
+            element "External" {
+                background #999999
+                color #ffffff
+            }
+        }
+    }
+}
